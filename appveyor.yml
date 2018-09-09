@@ -32,6 +32,6 @@ test_script:
       curl --connect-timeout 30 -sfL "http://${hostip}:9200/_cat/health"
 
 deploy_script:
-#  - ps: |
-#      echo $env:DOCKER_PASS | docker login -u $env:DOCKER_USER --password-stdin
-#      docker push $env:DOCKER_IMAGE_NAME
+  - ps: |
+      echo $env:DOCKER_PASS | docker login -u $env:DOCKER_USER --password-stdin
+      docker push $env:DOCKER_IMAGE_NAME
