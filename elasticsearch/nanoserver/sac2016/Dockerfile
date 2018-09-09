@@ -1,5 +1,5 @@
 # escape=`
-FROM microsoft/windowsservercore:ltsc2016 AS downloader
+FROM microsoft/windowsservercore AS downloader
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 ARG ES_VERSION="5.6.11"
