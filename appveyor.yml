@@ -13,9 +13,9 @@ init:
 #  - ps: docker version
 #  - ps: docker info
   - ps: docker images
-  - ps: |
-      cinst curl -y --no-progress
-      sal curl (Join-Path $env:ChocolateyInstall "bin\curl.exe") -O AllScope
+#  - ps: |
+#      cinst curl -y --no-progress
+#      sal curl (Join-Path $env:ChocolateyInstall "bin\curl.exe") -O AllScope
 
 build_script:
   - ps: |
@@ -26,12 +26,16 @@ build_script:
 
 test_script:
   - ps: |
-      $cid = docker run -d $env:DOCKER_IMAGE_NAME
-      $hostip = docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" $cid
-      Start-Sleep -s 15
-      curl --connect-timeout 30 -sfL "http://${hostip}:9200/_cat/health"
+      docker volume create unwound
+      docker run -v unwound:c:\data $env:DOCKER_IMAGE_NAME
+
+#  - ps: |
+#      $cid = docker run -d $env:DOCKER_IMAGE_NAME
+#      $hostip = docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" $cid
+#      Start-Sleep -s 15
+#      curl --connect-timeout 30 -sfL "http://${hostip}:9200/_cat/health"
 
 deploy_script:
-  - ps: |
-      echo $env:DOCKER_PASS | docker login -u $env:DOCKER_USER --password-stdin
-      docker push $env:DOCKER_IMAGE_NAME
+#  - ps: |
+#      echo $env:DOCKER_PASS | docker login -u $env:DOCKER_USER --password-stdin
+#      docker push $env:DOCKER_IMAGE_NAME
