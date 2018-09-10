@@ -28,6 +28,7 @@ RUN Set-ItemProperty -path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manag
    
 EXPOSE 9200 9300
 SHELL ["cmd", "/S", "/C"]
+CMD "mkdir c:\data"
 CMD ".\bin\elasticsearch.bat"
 
 WORKDIR $ES_HOME
